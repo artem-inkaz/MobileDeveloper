@@ -2,6 +2,7 @@ package com.example.mobiledeveloper
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Lifecycle
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,9 +14,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
     //    lifecycle.addObserver(getData)
+        if (lifecycle.currentState== Lifecycle.State.INITIALIZED)
+            println("INITIALIZED")
+        if (lifecycle.currentState== Lifecycle.State.CREATED)
+            println("CREATED")
+
     }
 
-
+    override fun onResume() {
+      //  if (lifecycle.currentState== Lifecycle.State.STARTED)
+        if (lifecycle.currentState== Lifecycle.State.CREATED)
+        //    println("STARTED")
+            println("CREATED")
+        super.onResume()
+    }
 
 
 
