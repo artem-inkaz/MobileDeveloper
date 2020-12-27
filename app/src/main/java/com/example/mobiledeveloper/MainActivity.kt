@@ -24,7 +24,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        mViewModel.liveData.observe(this, Observer {
 
+            textView.text = it
+        })
 
     }
 }
