@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,41 +13,44 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private val getData = GetData()
-
-    val myLiveData = MyLiveData()
-    //создаем observer отдельно
-    lateinit var observer : Observer<String>
-
+    var liveDataString = MutableLiveData<String>()
+    var liveDataInt = MutableLiveData<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //инициализация observer
-        observer = Observer {
-            testText1.text=it
-        }
+           liveDataString.value = "liveDataString"
+            liveDataInt.value = 1
 
-        //наблюдатель Livedata, видим изменения и сразу реагируем
-//        myLiveData.observe(this, Observer {
-//            //здесь обрабатывается какой-то код изменения
-//            testText1.text=it
-//        })
+        testText.text =liveDataString.value + "string"
+        testText1.text =liveDataInt.value.toString() + "int"
 
-        buttonSafe.setOnClickListener {
-            myLiveData.setValueToLiveData(edit_text.text.toString())
-        }
-    }
+        //кнопка по которой будет преобразование типов из String в Int
+       buttonSafe.setOnClickListener {
+           liveDataString = Transformations.map(liveDataInt){
+               it.toString()
+           } as MutableLiveData<String>
 
-    override fun onStart() {
-        super.onStart()
-        myLiveData.observe(this,observer)
-    }
+           liveDataString.observe(this, Observer {
+               testText.text=it
 
-    override fun onStop() {
-        super.onStop()
-        myLiveData.removeObserver(observer)
+           })
+       }
+
+        //кнопка по которой будет преобразование типов из Int в String
+//        buttonSafe.setOnClickListener {
+//            liveDataInt = Transformations.map(liveDataString){
+//                it.toInt()
+//            } as MutableLiveData<Int>
+//
+//            liveDataString.observe(this, Observer {
+//                testText.text=it
+//
+//            })
+//        }
+
+
     }
 
 }
