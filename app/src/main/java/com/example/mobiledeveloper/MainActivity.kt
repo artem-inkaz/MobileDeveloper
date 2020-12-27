@@ -29,15 +29,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         //наблюдатель Livedata, видим изменения и сразу реагируем
-        myLiveData.observe(this, Observer {
-            //здесь обрабатывается какой-то код изменения
-            testText1.text=it
-        })
+//        myLiveData.observe(this, Observer {
+//            //здесь обрабатывается какой-то код изменения
+//            testText1.text=it
+//        })
 
         buttonSafe.setOnClickListener {
             myLiveData.setValueToLiveData(edit_text.text.toString())
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        myLiveData.observe(this,observer)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        myLiveData.removeObserver(observer)
+    }
 
 }
