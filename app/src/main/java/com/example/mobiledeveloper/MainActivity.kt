@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
         mediatorLiveData.observe(this, Observer {
 
-
         })
 
         buttonSafe.setOnClickListener {
