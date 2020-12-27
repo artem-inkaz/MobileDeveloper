@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 //не является частью MainActivity
 //class MainViewModel:ViewModel() {
 //специльный класс AndroidViewModel который содержит ссылку на контекст
-    class MainViewModel(application: Application):AndroidViewModel(application) {
+    class MainViewModel(application: Application, val text:String):AndroidViewModel(application) {
 
     val liveData = MutableLiveData<String>()
 
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.*
         object : CountDownTimer(10000, 1000){
 
             override fun onFinish() {
-                Toast.makeText(getApplication(),"Hello", Toast.LENGTH_LONG).show()
+                Toast.makeText(getApplication(),text, Toast.LENGTH_LONG).show()
             }
 
             override fun onTick(p0: Long) {
