@@ -38,10 +38,17 @@
         android:id="@+id/buttonSafe"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="Save LiveData1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text" />
-
+    <Button
+        android:id="@+id/buttonSafe2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Save LiveData2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSafe" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
