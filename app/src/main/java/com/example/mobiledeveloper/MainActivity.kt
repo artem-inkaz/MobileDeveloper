@@ -11,26 +11,20 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var  mViewModel: MainViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        mViewModel = ViewModelProvider(this).get(MainViewModel:: class.java)
+
     }
 
     override fun onStart() {
         super.onStart()
-        object : CountDownTimer(20000, 1000){
 
-            override fun onFinish() {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTick(p0: Long) {
-                textView.text = (p0/1000).toString()
-            }
-
-
-        }.start()
 
     }
 }
